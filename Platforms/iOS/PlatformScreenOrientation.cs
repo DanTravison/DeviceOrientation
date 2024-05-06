@@ -25,8 +25,8 @@ internal class PlatformScreenOrientation
         bool result = false;
         if (UIDevice.CurrentDevice.CheckSystemVersion(16, 0))
         {
-
             UIInterfaceOrientationMask mask = orientation.Mask();
+            // Set for AppDelegate.GetSupportedInterfaceOrientations to query.
             Desired = mask;
             Trace.WriteLine(mask, "UIInterfaceOrientationMask");
  
@@ -40,6 +40,7 @@ internal class PlatformScreenOrientation
                 if (viewController != null)
                 {
                     result = true;
+                    // Set the scene title for AppDelegate.GetSupportedInterfaceOrientations
                     windowScene.Title = nameof(PlatformScreenOrientation);
                     viewController.SetNeedsUpdateOfSupportedInterfaceOrientations();
                     windowScene.RequestGeometryUpdate(new UIWindowSceneGeometryPreferencesIOS(mask), error =>
@@ -139,7 +140,5 @@ static class OrientationExtension
                 return UIInterfaceOrientation.Unknown;
         }
     }
-
-
 }
 
