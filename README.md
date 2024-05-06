@@ -15,7 +15,7 @@ page that requires a specific orientation.
 
 - MainPage.xaml and MainPage.xaml.cs
 Provides three buttons for changing the desired orientation, Portrait, Landscape, and Device
-where Device allows the view to following the device's orientation.
+where Device allows the view to follow the device's orientation.
 
 # Platform
 - ScreenOrientation.cs - provides a static Set(DisplayOrientation orientation) method that 
