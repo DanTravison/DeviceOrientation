@@ -76,6 +76,22 @@ internal class PlatformScreenOrientation
         Trace.WriteLine(result, "SetOrientation");
         return result;
     }
+
+    [Export("application:supportedInterfaceOrientationsForWindow:")]
+    public UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+    {
+        UIInterfaceOrientationMask result;
+        if (forWindow.WindowScene != null && forWindow.WindowScene.Title == nameof(PlatformScreenOrientation))
+        {
+            result = PlatformScreenOrientation.Desired;
+        }
+        else
+        {
+            result = application.SupportedInterfaceOrientationsForWindow(forWindow);
+        }
+        Trace.WriteLine(result, "GetSupportedInterfaceOrientations");
+        return result;
+    }
 }
 
 static class OrientationExtension

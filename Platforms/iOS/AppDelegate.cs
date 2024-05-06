@@ -1,29 +1,13 @@
 ﻿using DeviceOrientation.Platform;
 using Foundation;
-using System.Diagnostics;
-using UIKit;
 
-namespace DeviceOrientation
+namespace DeviceOrientation;
+
+// NOTE: We're simulating using ScreenOrientation support from a shared library
+// by deriving from the custom IOSApplicationDelegate instead of directly
+// from MauiUIApplicationDelegate.
+[Register("AppDelegate")]
+public class AppDelegate : IOSApplicationDelegate
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : MauiUIApplicationDelegate
-    {
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-
-        [Export("application:supportedInterfaceOrientationsForWindow:")]
-        public UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
-        {
-            UIInterfaceOrientationMask result;
-            if (forWindow.WindowScene != null && forWindow.WindowScene.Title == nameof(PlatformScreenOrientation))
-            {
-                result = PlatformScreenOrientation.Desired;
-            }
-            else
-            {
-                result = application.SupportedInterfaceOrientationsForWindow(forWindow);
-            }
-            Trace.WriteLine(result, "GetSupportedInterfaceOrientations");
-            return result;
-        }
-    }
+    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
